@@ -1,5 +1,10 @@
 extends layout
 
 block content
-  h1 #{title} Leggo
-  p Welcome to #{title}, let's do this
+  h1 #{title} 
+  p Welcome to #{title}
+  #objmap
+    object(data="images/MUNMask.svg", type="image/svg+xml", id="svgmap", width="100%", height="100%")
+  #map
+    svg(id="svgload",width='910', height='675')
+  script(src='javascripts/setupmap.js')
