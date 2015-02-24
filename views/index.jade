@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Control Panel
+  #ControlMap
+  object(data="images/MUNMask.svg", type="image/svg+xml", id="faction1Map", width="60%", height="60%")
+  br
+  object(data="images/MUNMask.svg", type="image/svg+xml", id="territoryMap", width="60%", height="60%")
+  br
+  object(data="images/MUNMask.svg", type="image/svg+xml", id="faction2Map", width="60%", height="60%")
+  br
+  script(src='javascripts/controlPanel2.js')

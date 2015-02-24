@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var faction1 = require('./routes/faction1');
+var faction2 = require('./routes/faction2');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/faction1', faction1);
+app.use('/faction2', faction2);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,3 +71,29 @@ var server = app.listen(3000, function () {
     console.log('MUNChina listening at http://%s:%s', host, port);
 
 });
+
+//Socket IO stuff
+var http = require('http');
+var thisServer = http.createServer(app);
+var io = require('socket.io').listen(thisServer);
+thisServer.listen(4000);
+
+io.on('connection', function(socket) {
+  console.log('Client Connected');
+  socket.on('faction1Shade', function(msg) {
+    console.log(msg);
+    socket.broadcast.emit("updateFac1Shade", msg);
+  });
+  socket.on('faction2Shade', function(msg) {
+    console.log(msg);
+    socket.broadcast.emit("updateFac2Shade", msg);
+  });
+  socket.on('territories', function(msg) {
+    console.log(msg);
+    socket.broadcast.emit('territories', msg);
+  });
+});
+
+//Every 5 ms, send an update about board state to all clients
+//Each 
+
