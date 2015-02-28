@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
           localShadedFaction1[this.id] = 1;
           console.log(localShadedFaction1);
         }
-        socket.emit("faction1Shade", localShadedFaction1);
       };
     }
   });
@@ -59,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
           localShadedFaction2[this.id] = 1;
           console.log(localShadedFaction2);
         }
-        socket.emit("faction2Shade", localShadedFaction2);
       };
     }
   });
@@ -86,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
       if (territories[this.id] === 0) {
         this.style.opacity = "0";
       }
-      socket.emit("territories", territories);
     };
 
     for (var i = 0; i < paths.length; i++) {
@@ -99,4 +96,22 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(territories);
 
   });
+
+  var button = document.getElementById("update");
+  button.onclick = function() {
+    socket.emit("update", {"faction1": localShadedFaction1, "faction2": localShadedFaction2, "territories": territories});
+  };
+
+  var resourceButton = document.getElementById("updateResources");
+  resourceButton.onclick = function() {
+    var emitArray = [];
+    var textAreas = document.getElementsByTagName("textarea");
+    for (var i = 0; i < 26; i++) {
+      if (textAreas[i].value === '') 
+        emitArray[i] = "No Resources";
+      else
+        emitArray[i] = textAreas[i].value;
+    }
+    socket.emit("resources", { "resources": emitArray });
+  }
 });

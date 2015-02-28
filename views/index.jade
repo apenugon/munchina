@@ -3,10 +3,98 @@ extends layout
 block content
   h1 Control Panel
   #ControlMap
-  object(data="images/MUNMask.svg", type="image/svg+xml", id="faction1Map", width="60%", height="60%")
-  br
-  object(data="images/MUNMask.svg", type="image/svg+xml", id="territoryMap", width="60%", height="60%")
-  br
-  object(data="images/MUNMask.svg", type="image/svg+xml", id="faction2Map", width="60%", height="60%")
-  br
+  .col-md-4
+    h3 Fog Faction 1
+    object(data="images/MUNMask.svg", type="image/svg+xml", id="faction1Map", width="90%", height="60%")
+  .col-md-4
+    h3 Territory Assignment
+    object(data="images/MUNMask.svg", type="image/svg+xml", id="territoryMap", width="90%", height="60%")
+  .col-md-4
+    h3 Fog Faction 2
+    object(data="images/MUNMask.svg", type="image/svg+xml", id="faction2Map", width="90%", height="60%")
+  center
+    button.btn(id="update") Update Fog of War and Territories
+  h1 Resource Assignment
+  .col-md-4
+    h2 Xinjiang
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Uliassutai
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Heilongjiang
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Jilin
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Shengjing
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Zhili
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Inner Mongolia
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Gansu
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Shaanxi
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Shanxi
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Shangdong
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Henan
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 JangSu
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Qinghai
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Tibet
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Sichuan
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Yunnan
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Guizhou
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Hubei
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Anhui
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Zheliang
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Jiangxi
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Hunan
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Guangxi
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Fujian
+    textarea.form-control(rows="5")
+  .col-md-4
+    h2 Guangdong
+    textarea.form-control(rows="5")
+  .col-md-4
+    
+  center
+    button.btn(id="updateResources") Update Resources
   script(src='javascripts/controlPanel2.js')

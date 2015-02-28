@@ -78,19 +78,37 @@ var thisServer = http.createServer(app);
 var io = require('socket.io').listen(thisServer);
 thisServer.listen(4000);
 
+var shadeFac1 = [];
+var shadeFac2 = [];
+var territories = [];
+var resources = [];
+
+for (var i = 0; i < 26; i++) {
+  shadeFac1[i] = 0;
+  shadeFac2[i] = 0;
+  territories[i] = 0;
+  resources[i] = "No Resources";
+}
+
 io.on('connection', function(socket) {
   console.log('Client Connected');
-  socket.on('faction1Shade', function(msg) {
-    console.log(msg);
-    socket.broadcast.emit("updateFac1Shade", msg);
+  socket.on('initialstate', function(msg) {
+    console.log("initial state");
+    socket.emit('initialstate', {'shade1' : shadeFac1, 'shade2': shadeFac2, 'territories': territories, 'resources': resources});
   });
-  socket.on('faction2Shade', function(msg) {
+  
+  socket.on('resources', function(msg) {
     console.log(msg);
-    socket.broadcast.emit("updateFac2Shade", msg);
+    resources = msg.resources;
+    socket.broadcast.emit('resources', msg);
   });
-  socket.on('territories', function(msg) {
+
+  socket.on('update', function(msg) {
     console.log(msg);
-    socket.broadcast.emit('territories', msg);
+    shadeFac1 = msg["faction1"];
+    shadeFac2 = msg["faction2"];
+    territories = msg["territories"];
+    socket.broadcast.emit('update', msg);
   });
 });
 
