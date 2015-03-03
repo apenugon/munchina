@@ -83,11 +83,11 @@ var shadeFac2 = [];
 var territories = [];
 var resources = [];
 
-for (var i = 0; i < 26; i++) {
+for (var i = 0; i < 32; i++) {
   shadeFac1[i] = 0;
   shadeFac2[i] = 0;
   territories[i] = 0;
-  resources[i] = "No Resources";
+  resources[i] = "";
 }
 
 io.on('connection', function(socket) {

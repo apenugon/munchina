@@ -9,10 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
   svg.addEventListener("load", function() {
     var svgContent = svg.contentDocument;
     console.log("Loaded");
-    console.log(svgContent);
-    var paths = svgContent.getElementsByTagName("path");
+    var allPaths = svgContent.getElementsByTagName("path");
+    var paths = [];
+    //Only place good paths into path array
+    var iter = 0;
+    for (var i = 0; i < allPaths.length; i++) {
+      if (allPaths[i].getAttribute("class") != "border") {
+        paths[iter++] = allPaths[i];
+      }
+    }
 
-    for (var i = 0; i < paths.length; i++) {
+   for (var i = 0; i < paths.length; i++) {
       localShadedFaction1[i] = 0;
       paths[i].style.fill = "black"; //Initialize to black 
       paths[i].style.opacity = "0";
@@ -38,7 +45,16 @@ document.addEventListener('DOMContentLoaded', function() {
     var svgContent = svg2.contentDocument;
     console.log("Loaded");
     console.log(svgContent);
-    var paths = svgContent.getElementsByTagName("path");
+    var allPaths = svgContent.getElementsByTagName("path");
+    var paths = [];
+    //Only place good paths into path array
+    var iter = 0;
+    for (var i = 0; i < allPaths.length; i++) {
+      if (allPaths[i].getAttribute("class") != "border") {
+        paths[iter++] = allPaths[i];
+      }
+    }
+
 
     for (var i = 0; i < paths.length; i++) {
       localShadedFaction2[i] = 0;
@@ -66,7 +82,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   territoryMap.addEventListener("load", function() {
     var territoryContent = territoryMap.contentDocument;
-    var paths = territoryContent.getElementsByTagName("path");
+    var allPaths = territoryContent.getElementsByTagName("path");
+    var paths = [];
+    //Only place good paths into path array
+    var iter = 0;
+    for (var i = 0; i < allPaths.length; i++) {
+      if (allPaths[i].getAttribute("class") != "border") {
+        paths[iter++] = allPaths[i];
+      }
+    }
 
     var pathFunction = function() {
       console.log("Clicked");
@@ -105,12 +129,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var resourceButton = document.getElementById("updateResources");
   resourceButton.onclick = function() {
     var emitArray = [];
+    // This only works because the number of h2 elements == number of text regions
+    var headers = document.getElementsByTagName("h2");
     var textAreas = document.getElementsByTagName("textarea");
-    for (var i = 0; i < 26; i++) {
-      if (textAreas[i].value === '') 
-        emitArray[i] = "No Resources";
-      else
-        emitArray[i] = textAreas[i].value;
+    for (var i = 0; i < 32; i++) {
+      emitArray[i] = textAreas[i].value;
     }
     socket.emit("resources", { "resources": emitArray });
   }
